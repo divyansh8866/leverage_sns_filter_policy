@@ -1,0 +1,32 @@
+service: ${env:SERVICE_NAME}
+
+frameworkVersion: '3'
+
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: python3.8
+  memorySize: 200
+  iam:
+    role: ${env:LAMBDA_IAM_ROLE}
+  deploymentBucket:
+    name: ${env:DEPLOYMENT_BUCKET}
+  timeout: 500
+  stackTags: 
+    created-date: 2022-12-05
+    customer-impact: 'false'
+    terraform: 'false'
+
+
+plugins:
+  - serverless-lift
+    
+functions: ${file(src/lambda/serverless.yml)}
+
+
+resources:
+  - ${file(src/sns/serverless.yml)}
+  - ${file(src/sqs/serverless.yml)}
+  - ${file(src/subscriptions/serverless.yml)}
+  - ${file(src/policies/serverless.yml)}

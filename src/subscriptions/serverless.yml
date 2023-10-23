@@ -1,0 +1,15 @@
+Resources:
+  MySNSTopicSubscription:
+    Type: 'AWS::SNS::Subscription'
+    Properties:
+      Protocol: 'sqs'
+      TopicArn:
+        Ref: MySNSTopic
+      Endpoint:
+        Fn::GetAtt:
+          - MySQS
+          - Arn
+      FilterPolicy:
+        Action:
+          - "Create"
+          - "create"

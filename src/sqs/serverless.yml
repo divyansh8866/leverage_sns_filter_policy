@@ -1,0 +1,15 @@
+Resources:
+  MySQS:
+    Type: 'AWS::SQS::Queue'
+    Properties:
+      QueueName: 'my_sqs'
+      VisibilityTimeout: 600 
+      RedrivePolicy:
+          deadLetterTargetArn:
+            Fn::GetAtt: [MyDLQQueue, Arn]
+          maxReceiveCount: 5
+
+  MyDLQQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: my_sqs_dlq

@@ -1,0 +1,9 @@
+MyLambdaFunction:
+  name: "my_lambda" 
+  handler: src/lambda/handler.handler
+  # Add any other function configurations here
+  events:
+    - sqs:
+        arn:
+          Fn::GetAtt: [MySQS, Arn]  # Replace 'MyQueue' with your queue logical name
+        batchSize: 5  # Adjust batch size as needed
