@@ -1,4 +1,4 @@
-![sns_filtering.jpg](docs/diagram.jpg)
+![sns_filtering.jpg](doc/thumbnail.jpg)
 
 ---
 
